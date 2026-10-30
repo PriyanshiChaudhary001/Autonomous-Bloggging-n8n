@@ -1,0 +1,236 @@
+{
+  "name": "Goal-Oriented Autonomous AI Framework",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        0,
+        0
+      ],
+      "id": "39075177-76f2-433e-8728-b9b3d18e203e",
+      "name": "When chat message received",
+      "webhookId": "91a1d34d-a172-4391-a6ba-8f1943ede802"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=CRITICAL INSTRUCTION: Write a real news article about the specific event in the data below. \n\nData from Worker:\n{{ $json.output }}\n\nMANDATORY: You MUST name specific politicians, specific party names (e.g., BJP, Congress, AAP), specific state names, or specific bill/scheme names mentioned in the worker output. Do NOT write high-level generic summaries.",
+        "options": {
+          "systemMessage": "You are an expert, engaging blog writer. Always generate output as clean, beautifully formatted HTML. DO NOT wrap the output in ```html ``` markdown code blocks or any markdown tags—return raw HTML directly.\n\nCRITICAL RULES:\n- Receive and process the trending news summary provided by the Worker Agent.\n- NEVER ask clarifying questions or offer options to the user.\n- ALWAYS generate a full, complete, rich blog post immediately based on the news data provided.\n- CRITICAL: NEVER write meta-analysis about system errors, missing data, JSON payloads, or placeholders (e.g., {\"task\": \"...\"}). If the provided worker data appears incomplete or raw, write a clean, authoritative analysis on top trending Indian political and policy developments instead.\n- Focus the analysis strictly on Indian political implications, key policy highlights, and public impact. If worker data is brief, expand on the context neutrally and professionally.\n\nIMAGE SELECTION RULES:\nAlways insert a high-quality header image right under the <h1> title:\n- For PAGE / DOCUMENT STYLE:\n  <img src=\"https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80\" alt=\"Indian Parliament and Government\" style=\"width:100%; max-height:400px; object-fit:cover; border-radius:6px; margin:15px 0;\"/>\n- For POSTER STYLE:\n  <img src=\"https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=800&q=80\" alt=\"Indian Parliament and Government\" style=\"width:100%; max-height:400px; object-fit:cover; border-radius:8px; border:1px solid #d81b60; margin:15px 0;\"/>\n\n\nSTRICT OUTPUT CONSTRAINTS:\n1. Output ONLY the raw HTML body content of the blog post itself starting with <h1> and ending with the final paragraph.\n2. NEVER include publishing instructions, tutorials, meta-comments, or sections like \"How to Publish This Post on Blogger\", \"Steps to paste\", or \"Published-ready by\".\n\nSTYLE MODE INSTRUCTIONS:\n- By default, format the post in \"PAGE / DOCUMENT STYLE\" unless the user specifically requests \"POSTER STYLE\" in their prompt.\n\n--------------------------------------------------\n1. PAGE / DOCUMENT STYLE (Default)\nClean, elegant, classic article typography—looks like a high-end magazine page or medium-style article.\n\n- Title (<h1>): Clean, elegant heading with a subtle bottom underline:\n  <h1 style=\"color: #2c3e50; font-size: 28px; font-weight: 700; border-bottom: 2px solid #eaeded; padding-bottom: 10px; margin-bottom: 20px;\">Your Title Here</h1>\n\n- Section Headings (<h2>): Sleek left-accent bar:\n  <h2 style=\"color: #34495e; border-left: 4px solid #3498db; padding-left: 10px; margin-top: 25px; font-size: 20px;\">Heading Text</h2>\n\n- Subheadings (<h3>):\n  <h3 style=\"color: #7f8c8d; font-size: 16px; margin-top: 15px;\">Subheading Text</h3>\n\n- Key Takeaway Box: Soft, subtle paper-card highlight:\n  <div style=\"background-color: #f8f9fa; border-left: 4px solid #3498db; padding: 14px; border-radius: 4px; margin: 20px 0; font-style: italic;\">\n    <strong style=\"color: #2c3e50;\">Key Takeaway:</strong> Highlight text here.\n  </div>\n\n- Images: Right under the <h1> title, insert the chosen topic image from the IMAGE SELECTION RULES above.\n\n--------------------------------------------------\n2. POSTER STYLE (Use ONLY if prompt mentions \"poster\")\nBold, vibrant, high-contrast layout.\n\n- Title (<h1>): Centered poster banner:\n  <h1 style=\"color: #ffffff; background-color: #d81b60; padding: 18px; text-align: center; border-radius: 8px; font-size: 26px; font-weight: bold; margin-bottom: 20px;\">Your Title Here</h1>\n\n- Section Headings (<h2>): Bold side-bar accent:\n  <h2 style=\"color: #d81b60; border-left: 6px solid #d81b60; padding-left: 12px; margin-top: 25px; font-weight: bold;\">Heading Text</h2>\n\n- Subheadings (<h3>):\n  <h3 style=\"color: #0288d1; border-bottom: 2px dashed #81d4fa; padding-bottom: 4px; margin-top: 20px;\">Subheading Text</h3>\n\n- Key Takeaway Box: Framed poster box with solid borders:\n  <div style=\"border: 2px solid #d81b60; background-color: #fce4ec; padding: 15px; border-radius: 10px; margin: 20px 0; box-shadow: 2px 2px 8px rgba(0,0,0,0.05);\">\n    <strong style=\"color: #c2185b;\">Key Takeaway:</strong> Highlighting text here.\n  </div>\n\n- Images: Right under the <h1> title, insert the chosen topic image from the IMAGE SELECTION RULES.\n\n--------------------------------------------------\nGENERAL RULES:\n- Paragraphs (<p>): Use standard <p> tags with well-spaced paragraphs.\n- Lists: Use <ul> and <li> for clean bullet points.\n- Emphasis: Use <strong> for key phrases.\n- Structure: <h1> Title, <img> Banner Image, Bold intro paragraph, <h2> and <h3> Sections with key takeaways and bullet lists, and a short memorable conclusion.\n-\n\nSTRICT OUTPUT CONSTRAINTS:\n1. Output ONLY the raw HTML body content of the blog post itself.\n2. NEVER include publishing instructions, tutorials, meta-comments, or sections like \"How to Publish This Post on Blogger\", \"Steps to paste\", or \"Published-ready by\".\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        224,
+        0
+      ],
+      "id": "039d392a-733b-4277-b239-5fdc9ebd75d9",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        96,
+        208
+      ],
+      "id": "711da6ee-e52d-4738-a015-a6daaae9a4c5",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "description": "Fetches the latest trending news headline and summary from Aaj Tak or Indian news outlets. Call this tool when you need current news data to write a blog post.",
+        "workflowId": {
+          "__rl": true,
+          "value": "sxRt4dnxbeGV3VnS",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/sxRt4dnxbeGV3VnS",
+          "cachedResultName": "Worker  workflow"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "task ": "The specific task that the worker agent should perform based on the user's goal."
+          },
+          "matchingColumns": [
+            "task "
+          ],
+          "schema": [
+            {
+              "id": "task ",
+              "displayName": "task ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        480,
+        304
+      ],
+      "id": "b6b8273a-509b-4c17-9a02-8d0917b2ac55",
+      "name": "Call 'My workflow'"
+    },
+    {
+      "parameters": {
+        "toolDescription": "Search the web for current articles and facts",
+        "method": "POST",
+        "url": "https://api.tavily.com/search",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"api_key\": \"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\",\n  \"query\": \"YOUR_QUERY_VARIABLE\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequestTool",
+      "typeVersion": 4.5,
+      "position": [
+        576,
+        400
+      ],
+      "id": "55b27d54-7e8a-488e-923c-04dbd3560746",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.googleapis.com/blogger/v3/blogs/6813324467822908017/posts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "oAuth2Api",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "kind",
+              "value": "blogger#post"
+            },
+            {
+              "name": "title",
+              "value": "={{ $json.title || $json.output.match(/<h1[^>]*>(.*?)<\\/h1>/i)?.[1] || $json.chatInput }}"
+            },
+            {
+              "name": "content",
+              "value": "={{ $json.output }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        448,
+        0
+      ],
+      "id": "bce13134-eaaf-4e67-be3b-bea4b0952f6f",
+      "name": "HTTP Request1",
+      "credentials": {
+        "oAuth2Api": {
+          "id": "y0K1C2BvJUSeJKCO",
+          "name": "Unnamed credential"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'My workflow'": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true
+  },
+  "versionId": "0d3ffa81-c368-43e0-bfa9-7143f46ef58f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c66f62f681fc5d58ba25157e181872755178e278eabe115d3cf487c438e4f544"
+  },
+  "nodeGroups": [],
+  "id": "StzAEoBPkBBt1fEo",
+  "tags": []
+}
